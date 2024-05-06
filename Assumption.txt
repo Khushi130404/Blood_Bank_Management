@@ -1,0 +1,63 @@
+**ASSUMPTIONS:**
+
+1. **Check-ups:**
+   - Each volunteer has a unique Vol_ID, related to Donor_ID of the Donor table.
+   - Attributes include Name, Weight, DOB, and Age (Derived from DOB).
+   - Relationship:
+     - One-to-One: A volunteer/donor can have only one check-up (1:1).
+
+2. **Donor:**
+   - Each donor has a unique Donor_ID.
+   - Attributes include Name, DOB, Age (Derived from DOB), Contact_Info, and Nurse_ID.
+   - Relationship:
+     - One-to-Many: A donor can participate in Multiple blood donations (1:N).
+     - One-to-One: A donor can participate in only one check-up (1:1).
+     - Many-to-One: Many donors can have blood collected by a common nurse (M:1).
+
+3. **Nurse:**
+   - Each nurse has a unique Nurse_ID.
+   - Attributes include Name, DOB, Age (Derived from DOB), Organization, Contact_Info, and Camp_ID.
+   - Relationship:
+     - Many-to-One: Multiple nurses can be assigned to one blood donation camp (N:1).
+     - One-to-Many: One nurse collects blood from multiple donors (1:N).
+
+4. **Blood:**
+   - Contains information related to blood samples.
+   - Attributes include Blood_Type, Hemoglobin, Red_blood_cells, White_blood_cells, Platelets, and Plasma.
+   - Linked to donors via Donor_ID.
+   - Relationship:
+     - Many-to-One: Multiple blood samples can be donated by one donor (N:1).
+     - Many-to-One: Multiple blood samples can be associated with one blood donation camp (N:1).
+
+5. **Blood_Donation_Camp:**
+   - Represents blood donation camps.
+   - Each camp has a unique Organization + Camp_ID.
+   - Attributes include Organization, location, Start_date, and End_date.
+   - Linked to a specific Blood_Bank via Blood_Bank_ID.
+   - Relationship:
+     - Many-to-One: Multiple blood donation camps can be associated with one blood bank (N:1).
+     - One-to-Many: One blood donation camp can have multiple nurses (1:N).
+     - One-to-Many: One blood donation camp receives multiple blood samples (1:N).
+
+6. **Blood_Bank:**
+   - Represents blood storage and distribution centers.
+   - Each blood bank has a unique Blood_Bank_ID.
+   - Attributes include BB_Name (bank name), BB_Location, Blood_Type, and Capacity.
+   - Relationship:
+     - One-to-Many: A blood bank can organize multiple blood donation camps (1:N).
+     - Many-to-Many: Multiple Blood Banks can cater to orders from multiple Hospitals (N:N).
+
+7. **Hospital:**
+   - Represents healthcare institutions where patients receive medical treatment.
+   - Each hospital has a unique Hospital_ID.
+   - Attributes include Hospital_Name and Hos_Address.
+   - Relationship:
+     - One-to-Many: A hospital can admit multiple patients (1:N).
+     - Many-to-Many: Multiple hospitals can order from multiple blood banks (N:N).
+
+8. **Patient:**
+   - Represents individuals seeking medical attention at hospitals.
+   - Each patient has a unique Hospital_ID + Patient_ID.
+   - Attributes include Name, Age, Sex, Blood_Type, Date_Admitted, and Date_Discharged.
+   - Relationship:
+    - Many-to-One: Each patient is admitted to one hospital (N:1).
