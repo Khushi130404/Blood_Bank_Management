@@ -1,0 +1,12 @@
+CREATE OR REPLACE FUNCTION FindAge(date_of_birth IN DATE)  
+RETURN NUMBER IS  
+BEGIN  
+    IF date_of_birth IS NULL THEN 
+        RETURN NULL; 
+    END IF; 
+ 
+    RETURN ROUND(MONTHS_BETWEEN(SYSDATE, date_of_birth) / 12);  
+EXCEPTION   
+    WHEN OTHERS THEN  
+        RETURN NULL;  
+END;
